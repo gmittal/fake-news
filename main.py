@@ -38,9 +38,7 @@ model.fit(train, y, batch_size=32, epochs=2)
 model.save_weights('save/model.h5')
 
 results = model.predict(test)
-print(results)
-
-results = np.argmax(results, axis=1)
+results = list(map(round, results))
 results = pd.Series(results,name="label")
 prediction = pd.concat([pd.Series(range(20800, 26000), name='id'),results], axis=1)
 prediction.to_csv("submission.csv", index=False)
