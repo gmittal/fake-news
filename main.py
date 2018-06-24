@@ -2,33 +2,39 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from tensorflow.python.keras import Sequential
-from tensorflow.python.keras.layers import Dense
-from tensorflow.python.keras.preprocessing.text import Tokenizer
+from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Embedding
+from keras.layers import Bidirectional, GlobalMaxPool1D
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+
+# Load the training and test data
+train_data = pd.read_csv('data/train.csv')
+test_data = pd.read_csv('data/test.csv')
+train_data = train_data.fillna(' ')
+test_data = test_data.fillna(' ')
+y = train_data['label'].values # Class values
+
+train_sent = train_data['title'] + ' ' + train_data['author'] + ' ' + train_data['text']
+test_sent = test_data['title'] + ' ' + test_data['author'] + ' ' + test_data['text']
 
 tokenizer = Tokenizer(num_words=20000)
+tokenizer.fit_on_texts(list(train_sent))
+train_tokens = tokenizer.texts_to_sequences(train_sent)
+test_tokens = tokenizer.texts_to_sequences(test_sent)
 
-# Load the training data
-data = pd.read_csv('data/train.csv')
-data = data.fillna(' ')
-data['full_text'] = data['title'] + ' ' + data['author'] + ' ' + data['text']
-# tokenizer.fit_on_texts(data['full_text'].values)
-# train_docs = tokenizer.texts_to_matrix(data['full_text'].values, mode='tfidf')
-train_labels = data['label'].values #tf.keras.utils.to_categorical(data['label'].values, 2)
-# np.save('data/train_mat.npy', train_docs)
-train_docs = np.load('data/train_mat.npy')
 
-# Load testing data
-# test = pd.read_csv('data/test.csv')
-# test = test.fillna(' ')
-# test['full_text'] = test['title'] + ' ' + test['author'] + ' ' + test['text']
-# test_docs = tokenizer.texts_to_matrix(test['full_text'].values, mode='tfidf')
-# np.save('data/test_mat.npy', test_docs)
-#
-# print(train_docs.shape)
-# print(test_docs.shape)
+
+train = pad_sequences(train_tokens, maxlen=200)
+test = pad_sequences(test_tokens, maxlen=200)
 
 model = Sequential()
-model.add(Dense(10000, input_shape=(242483,), activation='relu'))
-model.add(Dense(1, activation='softmax'))
-model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
-model.fit(train_docs, train_labels, validation_split=0.2, epochs=10, batch_size=128)
+model.add(Embedding(20000, 128, input_length=200))
+model.add(Bidirectional(LSTM(60, return_sequences=True)))
+model.add(GlobalMaxPool1D())
+model.add(Dropout(0.1))
+model.add(Dense(50, activation='relu'))
+model.add(Dropout(0.1))
+model.add(Dense(1, activation='sigmoid'))
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+model.fit(train, y, batch_size=32, epochs=2, validation_split=0.1)
