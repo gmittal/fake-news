@@ -1,3 +1,6 @@
+# Fake News Classification with Deep Learning
+# Written by Gautam Mittal
+
 import numpy as np
 import pandas as pd
 from keras.models import Sequential
