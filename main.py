@@ -5,12 +5,12 @@ from tensorflow.python.keras import Sequential
 from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.preprocessing.text import Tokenizer
 
-tokenizer = Tokenizer()
+tokenizer = Tokenizer(num_words=20000)
 
 # Load the training data
 data = pd.read_csv('data/train.csv')
 data = data.fillna(' ')
-# data['full_text'] = data['title'] + ' ' + data['author'] + ' ' + data['text']
+data['full_text'] = data['title'] + ' ' + data['author'] + ' ' + data['text']
 # tokenizer.fit_on_texts(data['full_text'].values)
 # train_docs = tokenizer.texts_to_matrix(data['full_text'].values, mode='tfidf')
 train_labels = data['label'].values #tf.keras.utils.to_categorical(data['label'].values, 2)
