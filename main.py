@@ -35,10 +35,10 @@ model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 model.fit(train, y, batch_size=32, epochs=2)
-
+model.save_weights('save/model.h5')
 
 results = model.predict(test)
-
+print(results)
 
 results = np.argmax(results, axis=1)
 results = pd.Series(results,name="label")
