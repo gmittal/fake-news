@@ -2,8 +2,9 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from tensorflow.python.keras import Sequential
-from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Embedding
+from keras.layers import Dense, Input, LSTM, Embedding, Dropout
 from keras.layers import Bidirectional, GlobalMaxPool1D
+from keras.layers.embeddings import Embedding
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
