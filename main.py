@@ -39,9 +39,11 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 
 model.fit(train, y, batch_size=32, epochs=2)
 model.save_weights('save/model.h5')
+#model.load_weights('save/model.h5')
 
 results = model.predict(test)
-results = list(map(round, results))
+results = np.round(results)
+results = results.reshape(results.shape[0])
 results = pd.Series(results,name="label")
 prediction = pd.concat([pd.Series(range(20800, 26000), name='id'),results], axis=1)
 prediction.to_csv("submission.csv", index=False)
