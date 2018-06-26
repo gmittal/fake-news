@@ -1,4 +1,4 @@
-# Fake News Classification with Deep Learning
+B# Fake News Classification with Deep Learning
 # Written by Gautam Mittal
 
 import numpy as np
@@ -46,4 +46,5 @@ results = np.round(results)
 results = results.reshape(results.shape[0])
 results = pd.Series(results,name="label")
 prediction = pd.concat([pd.Series(range(20800, 26000), name='id'),results], axis=1)
+prediction['label'] = prediction['label'].map(int)
 prediction.to_csv("submission.csv", index=False)
