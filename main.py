@@ -1,4 +1,4 @@
-B# Fake News Classification with Deep Learning
+# Fake News Classification with Deep Learning
 # Written by Gautam Mittal
 
 import numpy as np
