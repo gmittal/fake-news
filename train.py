@@ -22,6 +22,8 @@ y = train_data['label'].values # Class values
 
 train_sent = train_data['title'] + ' ' + train_data['author'] + ' ' + train_data['text']
 test_sent = test_data['title'] + ' ' + test_data['author'] + ' ' + test_data['text']
+train_sent = train_sent.str.lower()
+test_sent = test_sent.str.lower()
 
 tokenizer = Tokenizer(num_words=20000)
 tokenizer.fit_on_texts(list(train_sent))
