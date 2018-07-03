@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from keras.models import Sequential
 from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Embedding
-from keras.layers import Bidirectional, GlobalMaxPool1D
+from keras.layers import Bidirectional, GlobalMaxPool1D, Conv1D
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
@@ -28,8 +28,9 @@ train = pad_sequences(train_tokens, maxlen=1000)
 test = pad_sequences(test_tokens, maxlen=1000)
 
 model = Sequential()
-model.add(Embedding(20000, 128, input_length=1000))
-model.add(Bidirectional(LSTM(60, return_sequences=True)))
+model.add(Embedding(20000, 256, input_length=1000))
+model.add(Bidirectional(LSTM(128, return_sequences=True)))
+model.add(Conv1D(64, kernel_size=3, padding="valid", kernel_initializer="glorot_uniform"))
 model.add(GlobalMaxPool1D())
 model.add(Dropout(0.1))
 model.add(Dense(50, activation='relu'))
@@ -37,9 +38,13 @@ model.add(Dropout(0.1))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-model.fit(train, y, batch_size=32, epochs=2)
+model.fit(train, y, batch_size=128, epochs=2, validation_split=0.1)
+
+# Save model architecture and weights
+model_arch = model.to_json()
+with open('save/model.json', 'w') as file:
+    file.write(model_arch)
 model.save_weights('save/model.h5')
-#model.load_weights('save/model.h5')
 
 results = model.predict(test)
 results = np.round(results)
