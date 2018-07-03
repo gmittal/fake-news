@@ -42,7 +42,7 @@ model.add(Dropout(0.1))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-model.fit(train, y, batch_size=64, epochs=20, validation_split=0.1, callbacks=[early_stopping])
+model.fit(train, y, batch_size=32, epochs=20, validation_split=0.1, callbacks=[early_stopping])
 
 # Save model architecture and weights
 model.save('save/model.h5')
