@@ -8,7 +8,7 @@ from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Embedding
 from keras.layers import Bidirectional, GlobalMaxPool1D, Conv1D
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
-from keras.models import model_from_json
+from keras.models import load_model
 
 # Load the training and test data
 train_data = pd.read_csv('data/train.csv')
@@ -28,9 +28,7 @@ test_tokens = tokenizer.texts_to_sequences(test_sent)
 train = pad_sequences(train_tokens, maxlen=1000)
 test = pad_sequences(test_tokens, maxlen=1000)
 
-model_arch = open('save/model.json', 'r').read()
-model = model_from_json(model_arch)
-model.load_weights('save/model.h5')
+model = load_model('save/model.h5')
 
 results = model.predict(test)
 results = np.round(results)

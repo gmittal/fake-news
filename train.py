@@ -45,7 +45,5 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(train, y, batch_size=128, epochs=2, validation_split=0.1, callbacks=[early_stopping])
 
 # Save model architecture and weights
-model_arch = model.to_json()
-with open('save/model.json', 'w') as file:
-    file.write(model_arch)
-model.save_weights('save/model.h5')
+model.save('save/model.h5')
+model.save_weights('save/model_weights.h5')
