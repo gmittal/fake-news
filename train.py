@@ -28,7 +28,7 @@ test_data = test_data.fillna(' ')
 y = train_data['label'].values # Class values
 
 train_sent = train_data['title'] + ' ' + train_data['author'] + ' ' + train_data['text']
-train_sent = train_sent.dropna()
+train_sent = train_sent.dropna(how='all')
 test_sent = test_data['title'] + ' ' + test_data['author'] + ' ' + test_data['text']
 
 tokenizer = Tokenizer(num_words=20000, lower=True)
