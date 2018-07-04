@@ -7,12 +7,18 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Embedding
 from keras.layers import Bidirectional, GlobalMaxPool1D, Conv1D
-from keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping, ModelCheckpoint, Tensorboard
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
-# Add early stopping callback
+# Set up callbacks
+tensorboard = Tensorboard(log_dir='./logs')
 early_stopping = EarlyStopping(monitor='val_loss', patience=2)
+checkpoint = ModelCheckpoint('save/model.checkpoint.h5',
+                                monitor='val_loss',
+                                verbose=1,
+                                save_best_only=True,
+                                mode='max')
 
 # Load the training and test data
 train_data = pd.read_csv('data/train.csv')
@@ -45,8 +51,7 @@ model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 keras.utils.plot_model(model, to_file='save/model.png') # Save a graphical representation of the model
 
-model.fit(train, y, batch_size=32, epochs=20, validation_split=0.1, callbacks=[early_stopping])
+model.fit(train, y, batch_size=32, epochs=20, validation_split=0.1, callbacks=[checkpoint, early_stopping, tensorboard])
 
-# Save model architecture and weights
+# Save final model
 model.save('save/model.h5')
-model.save_weights('save/model_weights.h5')
