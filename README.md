@@ -6,3 +6,6 @@ Install dependencies.
 ```
 pip install -r requirements.txt
 ```
+
+### Model Architecture
+![model](save/model.png)
