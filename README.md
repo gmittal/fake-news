@@ -19,8 +19,12 @@ To try the model out, run:
 python evaluate.py
 ```
 
-### Model Architecture
-<center><img src="save/model.png" /></center>
+### Network Architecture
+<p align="center">
+<img width="300" src="save/model.png"/>
+</p>
+
+
   
 ### License
 The MIT License (MIT)
