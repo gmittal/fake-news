@@ -3,6 +3,7 @@
 
 import numpy as np
 import pandas as pd
+import keras
 from keras.models import Sequential
 from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Embedding
 from keras.layers import Bidirectional, GlobalMaxPool1D, Conv1D
@@ -21,11 +22,10 @@ test_data = test_data.fillna(' ')
 y = train_data['label'].values # Class values
 
 train_sent = train_data['title'] + ' ' + train_data['author'] + ' ' + train_data['text']
+train_sent.dropna()
 test_sent = test_data['title'] + ' ' + test_data['author'] + ' ' + test_data['text']
-train_sent = train_sent.str.lower()
-test_sent = test_sent.str.lower()
 
-tokenizer = Tokenizer(num_words=20000)
+tokenizer = Tokenizer(num_words=20000, lower=True)
 tokenizer.fit_on_texts(list(train_sent))
 train_tokens = tokenizer.texts_to_sequences(train_sent)
 test_tokens = tokenizer.texts_to_sequences(test_sent)
