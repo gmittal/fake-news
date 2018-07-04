@@ -2,13 +2,25 @@
 Kaggle's "Fake News" by the UTK Machine Learning Club. Achieves approximately 96.7% accuracy on Kaggle test data.
 
 ### Installation
-Install dependencies.
+Install dependencies with ```pip```.
 ```
 pip install -r requirements.txt
 ```
 
+### Usage
+To train a new model, although a saved checkpoint is included with this repository, simply run the following.
+
+```
+python train.py
+```
+
+To try the model out, run:
+```
+python evaluate.py
+```
+
 ### Model Architecture
-![model](save/model.png)
+<center>![model](save/model.png)</center>
 
 ### License
 The MIT License (MIT)
