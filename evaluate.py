@@ -18,9 +18,10 @@ test_data = test_data.fillna(' ')
 y = train_data['label'].values # Class values
 
 train_sent = train_data['title'] + ' ' + train_data['author'] + ' ' + train_data['text']
+train_sent = train_sent.dropna(how='all')
 test_sent = test_data['title'] + ' ' + test_data['author'] + ' ' + test_data['text']
 
-tokenizer = Tokenizer(num_words=20000)
+tokenizer = Tokenizer(num_words=20000, lower=True)
 tokenizer.fit_on_texts(list(train_sent))
 train_tokens = tokenizer.texts_to_sequences(train_sent)
 test_tokens = tokenizer.texts_to_sequences(test_sent)
@@ -28,7 +29,7 @@ test_tokens = tokenizer.texts_to_sequences(test_sent)
 train = pad_sequences(train_tokens, maxlen=1000)
 test = pad_sequences(test_tokens, maxlen=1000)
 
-model = load_model('save/model.h5')
+model = load_model('save/model.checkpoint.h5')
 
 results = model.predict(test)
 results = np.round(results)
