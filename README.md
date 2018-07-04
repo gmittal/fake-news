@@ -20,8 +20,8 @@ python evaluate.py
 ```
 
 ### Model Architecture
-<center>![model](save/model.png)</center>
-
+<center><img src="save/model.png" /></center>
+  
 ### License
 The MIT License (MIT)
 
