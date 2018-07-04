@@ -13,9 +13,9 @@ from keras.preprocessing.sequence import pad_sequences
 
 # Set up callbacks
 tensorboard = TensorBoard(log_dir='./logs')
-early_stopping = EarlyStopping(monitor='val_loss', patience=2)
+early_stopping = EarlyStopping(monitor='val_acc', patience=2)
 checkpoint = ModelCheckpoint('save/model.checkpoint.h5',
-                                monitor='val_loss',
+                                monitor='val_acc',
                                 verbose=1,
                                 save_best_only=True,
                                 mode='max')
