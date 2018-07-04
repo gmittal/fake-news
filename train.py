@@ -7,12 +7,12 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Embedding
 from keras.layers import Bidirectional, GlobalMaxPool1D, Conv1D
-from keras.callbacks import EarlyStopping, ModelCheckpoint, Tensorboard
+from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
 # Set up callbacks
-tensorboard = Tensorboard(log_dir='./logs')
+tensorboard = TensorBoard(log_dir='./logs')
 early_stopping = EarlyStopping(monitor='val_loss', patience=2)
 checkpoint = ModelCheckpoint('save/model.checkpoint.h5',
                                 monitor='val_loss',
