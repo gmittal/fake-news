@@ -1,5 +1,5 @@
-# Fake News Classification with Deep Learning
-Kaggle's "Fake News" by the UTK Machine Learning Club. Achieves approximately 96.7% accuracy on Kaggle test data.
+# Fake News Classification
+A system to identify unreliable news articles with deep learning.
 
 ### Installation
 Install dependencies with ```pip```.
@@ -19,13 +19,13 @@ To try the model out, run:
 python evaluate.py
 ```
 
-### Network Architecture
+### Model
+Below is the network architecture used for classification. It was trained on [data from the UTK Machine Learning Club](https://www.kaggle.com/c/fake-news/data) available on Kaggle.
 <p align="center">
 <img width="300" src="save/model.png"/>
 </p>
 
 
-  
 ### License
 The MIT License (MIT)
 
