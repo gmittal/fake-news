@@ -1,7 +1,7 @@
 # Fake News Classification with Deep Learning
 # Written by Gautam Mittal
 
-import argparse
+import sys, argparse
 import numpy as np
 import pandas as pd
 from keras.models import Sequential
@@ -11,6 +11,15 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import load_model
 from util.tokenizer_helpers import *
+
+# Parse command line arguments
+parser = argparse.ArgumentParser(description='Test drive the fake news classifier.')
+parser.add_argument('-t', action='store', dest='test', default=True, help='Make predictions on test.csv and output a submission.csv')
+parser.add_argument('-a', action='store', dest='article', type=str, help='Classify a file with article text as real or fake')
+args = parser.parse_args()
+
+if args.article:
+    args.test = False
 
 # Rebuild saved tokenizer
 tokenizer = load_tokenizer('save/tokenizer.pickle')
@@ -24,6 +33,8 @@ test = pad_sequences(test_tokens, maxlen=1000)
 
 model = load_model('save/model.h5')
 
+if not args.test: # Terminate the program early if we're not creating test predictions
+    sys.exit()
 results = model.predict(test)
 results = np.round(results)
 results = results.reshape(results.shape[0])
