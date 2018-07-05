@@ -23,7 +23,6 @@ checkpoint = ModelCheckpoint('save/model.h5',
 # Load the training and test data
 train_data = pd.read_csv('data/train.csv')
 test_data = pd.read_csv('data/test.csv')
-train_data = train_data.dropna(how='all')
 train_data = train_data.fillna(' ')
 test_data = test_data.fillna(' ')
 y = train_data['label'].values # Class values
