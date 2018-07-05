@@ -18,9 +18,6 @@ parser.add_argument('-t', action='store', dest='test', default=True, help='Make 
 parser.add_argument('-a', action='store', dest='article', type=str, help='Classify a file with article text as real or fake')
 args = parser.parse_args()
 
-if args.article:
-    args.test = False
-
 # Rebuild saved tokenizer
 tokenizer = load_tokenizer('save/tokenizer.pickle')
 
@@ -32,6 +29,14 @@ test_tokens = tokenizer.texts_to_sequences(test_sent)
 test = pad_sequences(test_tokens, maxlen=1000)
 
 model = load_model('save/model.h5')
+
+if args.article:
+    with open(args.article, 'rb') as f:
+        article = f.read()
+    args.test = False
+    article_tokens = tokenizer.texts_to_sequences([str(article)])
+    article_vec = pad_sequences(article_tokens, maxlen=1000)
+    print(model.predict(article_vec))
 
 if not args.test: # Terminate the program early if we're not creating test predictions
     sys.exit()
