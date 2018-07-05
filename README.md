@@ -20,7 +20,7 @@ python evaluate.py
 ```
 
 ### Model
-Below is the network architecture used for classification. It was trained on [data from the UTK Machine Learning Club](https://www.kaggle.com/c/fake-news/data) available on Kaggle. Achieves approximately 99% test accuracy on both validation data and the [public Kaggle leaderboard](save/leaderboard.png) test data.
+Below is the network architecture used for classification. It was trained on [data from the UTK Machine Learning Club](https://www.kaggle.com/c/fake-news/data) available on Kaggle. **Achieves approximately 99% test accuracy** on both validation data and the [public Kaggle leaderboard](save/leaderboard.png) test data.
 
 <p align="center">
 <img width="300" src="save/model.png"/>
