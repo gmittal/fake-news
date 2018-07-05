@@ -29,7 +29,7 @@ test_tokens = tokenizer.texts_to_sequences(test_sent)
 train = pad_sequences(train_tokens, maxlen=1000)
 test = pad_sequences(test_tokens, maxlen=1000)
 
-model = load_model('save/model.checkpoint.h5')
+model = load_model('save/model.h5')
 
 results = model.predict(test)
 results = np.round(results)

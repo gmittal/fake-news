@@ -14,7 +14,7 @@ from keras.preprocessing.sequence import pad_sequences
 # Set up callbacks
 tensorboard = TensorBoard(log_dir='./logs')
 early_stopping = EarlyStopping(monitor='val_acc', patience=2)
-checkpoint = ModelCheckpoint('save/model.checkpoint.h5',
+checkpoint = ModelCheckpoint('save/model.h5',
                                 monitor='val_acc',
                                 verbose=1,
                                 save_best_only=True,
@@ -52,6 +52,3 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 keras.utils.plot_model(model, to_file='save/model.png') # Save a graphical representation of the model
 
 model.fit(train, y, batch_size=32, epochs=20, validation_split=0.1, callbacks=[checkpoint, early_stopping, tensorboard])
-
-# Save final model
-model.save('save/model.h5')
