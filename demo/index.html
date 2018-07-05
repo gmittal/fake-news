@@ -6,6 +6,7 @@
     <title>Fake News Classification</title>
 
     <link href="//fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width">
@@ -33,8 +34,11 @@
       </header>
       <section>
         <h1 id="demo_header">Writing Experiment</h1>
-
-        <textarea id='news_content'></textarea>
+        <div id="prediction">
+          <div id="circle" class="real"></div>
+          <span id="helper">Unlikely to perceived as unreliable.</span>
+        </div>
+        <textarea id="news_content" placeholder="Type here to see the potential effect of what you're writing."></textarea>
       </section>
       <footer>
         <p>Maintained by <a href="https://github.com/gmittal">Gautam Mittal</a></p>
