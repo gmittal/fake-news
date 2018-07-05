@@ -8,13 +8,17 @@ pip install -r requirements.txt
 ```
 
 ### Usage
-To train a new model, although a saved checkpoint is included with this repository, simply run the following.
+To train a new model, simply run the following. A pre-trained model checkpoint is included with this repository.
 
 ```
 python train.py
 ```
 
 To try the model out, run:
+```
+python evaluate.py -a data/real.txt
+```
+To generate a ```submission.csv``` prediction file based on the [Kaggle](https://www.kaggle.com/c/fake-news) ```test.csv``` data, simply run:
 ```
 python evaluate.py
 ```
