@@ -194,6 +194,38 @@ footer {
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
+textarea {
+  box-sizing: border-box;
+  resize: none;
+  width: 100%;
+  padding: 20px;
+  overflow: auto;
+  height: 400px;
+  line-height: 1.15;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.spacing {
+  display: none;
+  height: 110px;
+}
+
+#demo_header {
+  box-sizing: border-box;
+  background-color: rgb(87, 9, 231);
+  border: 1px solid rgb(87, 9, 231);
+  margin-bottom: 0px;
+  width: 100%;
+  padding: 20px 30px;
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 @media print, screen and (max-width: 960px) {
 
   div.wrapper {
@@ -245,6 +277,10 @@ footer {
   pre, code {
     word-wrap:normal;
   }
+
+  .spacing {
+    display: block;
+  }
 }
 
 @media print, screen and (max-width: 480px) {
@@ -258,6 +294,10 @@ footer {
 
   header li, header ul li + li + li {
     width:33%;
+  }
+
+  .spacing {
+    height: 90px;
   }
 }
 
