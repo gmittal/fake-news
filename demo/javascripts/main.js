@@ -31,6 +31,32 @@ let process_text = (text) => {
   return tf.tensor([pad_sequence(text_to_sequence(text), MAXLEN)])
 }
 
-$(document).ready(() => {
-  const model = await tf.loadModel('tfjs/model.json')
+// Load trained Keras model
+var model;
+(async () => {
+  model = await tf.loadModel('tfjs/model.json')
+})().then(() => {
+  $('#prediction #circle').removeClass('loading').addClass('real')
+  $('#prediction #helper').text('Ready')
 });
+
+async function evaluate(text) {
+  let prediction = await model.predict(process_text(text)).get(0, 0)
+  if (prediction > 0.5) {
+    $('#prediction #circle').removeClass('loading').addClass('fake')
+    $('#prediction #helper').text(`News article is likely to be unreliable (${prediction.toFixed(2)})`)
+  } else {
+    $('#prediction #circle').removeClass('loading').addClass('real')
+    $('#prediction #helper').text(`News article is likely to be reliable (${prediction.toFixed(2)})`)
+  }
+}
+
+var typingTimer;
+$('#news_content').keyup(() => {
+  clearTimeout(typingTimer)
+  typingTimer = setTimeout(() => {
+    $('#prediction #circle').removeClass('real').removeClass('fake').addClass('loading')
+    $('#prediction #helper').text('Generating prediction...')
+    evaluate($('#news_content').val())
+  }, 1000);
+})

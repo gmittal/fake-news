@@ -244,6 +244,10 @@ textarea:focus {
   background-color: #8e44ad;
 }
 
+.loading {
+  background-color: #f39c12;
+}
+
 #prediction #helper {
   /* font-family: 'Roboto Mono', monospace; */
   color: #999;
