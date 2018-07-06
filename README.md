@@ -16,9 +16,7 @@ python train.py
 
 To convert the saved model checkpoint to a TensorFlow.js-compatible checkpoint for the in-browser demo, run:
 ```
-tensorflowjs_converter --input_format keras \
-                       save/model.h5 \
-                       demo/tfjs
+tensorflowjs_converter --input_format keras save/model.h5 demo/tfjs
 ```
 
 To try the model out, run:
