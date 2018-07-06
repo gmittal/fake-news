@@ -1,3 +1,4 @@
+let MAXLEN = 1000
 let WORD_INDEX = JSON.parse($.ajax({
   dataType: "json",
   url: '../save/tokenizer_word_index.json',
@@ -25,3 +26,11 @@ let pad_sequence = (seq, maxlen) => {
     seq.unshift(0)
   return seq
 }
+
+let process_text = (text) => {
+  return tf.tensor([pad_sequence(text_to_sequence(text), MAXLEN)])
+}
+
+$(document).ready(() => {
+  const model = await tf.loadModel('tfjs/model.json')
+});
