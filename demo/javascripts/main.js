@@ -13,6 +13,6 @@ let tokenize = (text) => {
 
 let text_to_sequence = (text) => {
   let tokens = tokenize(text)
-
+  return tokens.map(x => WORD_INDEX[x])
 }
 // console.log(tokenize('Hello world! this is a great day (sort of), and I want to hear what everyone can\'t here about it'))
