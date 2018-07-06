@@ -1,4 +1,8 @@
-WORD_INDEX = JSON.parse('')
+let WORD_INDEX = JSON.parse($.ajax({
+  dataType: "json",
+  url: '/save/tokenizer_word_index.json',
+  async: false
+}).responseText);
 
 let tokenize = (text) => {
   text = text.toLowerCase()
@@ -11,4 +15,4 @@ let text_to_sequence = (text) => {
   let tokens = tokenize(text)
 
 }
-console.log(tokenize('Hello world! this is a great day (sort of), and I want to hear what everyone can\'t here about it'))
+// console.log(tokenize('Hello world! this is a great day (sort of), and I want to hear what everyone can\'t here about it'))
