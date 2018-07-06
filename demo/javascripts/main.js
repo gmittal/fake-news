@@ -13,6 +13,15 @@ let tokenize = (text) => {
 
 let text_to_sequence = (text) => {
   let tokens = tokenize(text)
-  return tokens.map(x => WORD_INDEX[x])
+  var indicies = tokens.map(x =>
+    WORD_INDEX[x] == 'undefined' ? -1 : WORD_INDEX[x])
+  return indicies.filter(x => x != -1)
 }
-// console.log(tokenize('Hello world! this is a great day (sort of), and I want to hear what everyone can\'t here about it'))
+
+let pad_sequence = (seq, maxlen) => {
+  if (seq.length > maxlen)
+    return seq.slice(seq.length-maxlen, seq.length)
+  for (var i = seq.length; i < maxlen; i++)
+    seq.unshift(0)
+  return seq
+}
