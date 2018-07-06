@@ -1,6 +1,6 @@
 let WORD_INDEX = JSON.parse($.ajax({
   dataType: "json",
-  url: '/save/tokenizer_word_index.json',
+  url: '../save/tokenizer_word_index.json',
   async: false
 }).responseText);
 
