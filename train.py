@@ -36,6 +36,7 @@ tokenizer.fit_on_texts(list(train_sent))
 train_tokens = tokenizer.texts_to_sequences(train_sent)
 test_tokens = tokenizer.texts_to_sequences(test_sent)
 save_tokenizer('save/tokenizer.pickle', tokenizer)
+save_word_index('save/tokenizer_word_index.json', tokenizer)
 
 train = pad_sequences(train_tokens, maxlen=1000)
 test = pad_sequences(test_tokens, maxlen=1000)
